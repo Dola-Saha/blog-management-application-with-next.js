@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #f8fafc; color: #0f172a; font-family: Arial, Helvetica, sans-serif; }
+  body { min-width: 320px; overflow-x: hidden; }
+  a { text-decoration: none; }
+}
+
+@layer components {
+  .blogspace-password {
+    -webkit-text-security: disc;
+  }
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+    transition-duration: 250ms;
+    transition-timing-function: ease;
+  }
+
+  button:not(:disabled):hover,
+  a:hover {
+    transition-duration: 250ms;
+  }
+
+  button:not(:disabled):hover {
+    transform: translateY(-1px);
+  }
+
+  button:not(:disabled):active,
+  a:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  a svg,
+  button svg {
+    transition: color 250ms ease, transform 250ms ease;
+  }
+
+  a:hover svg,
+  button:not(:disabled):hover svg {
+    transform: scale(1.08);
+  }
+
+  header a {
+    position: relative;
+  }
+
+  header a:not(.shrink-0)::after {
+    content: "";
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.35rem;
+    left: 0.75rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: #2563eb;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 250ms ease;
+  }
+
+  header a:not(.shrink-0):hover::after,
+  header a:not(.shrink-0):focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  input:not([type="file"]),
+  textarea,
+  select {
+    transition: border-color 250ms ease, box-shadow 250ms ease, background-color 250ms ease;
+  }
+
+  input:not([type="file"]):focus,
+  textarea:focus,
+  select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+  }
+
+  a img,
+  button img {
+    transition: transform 300ms ease, filter 300ms ease;
+  }
+
+  a:hover img,
+  button:not(:disabled):hover img {
+    transform: scale(1.06);
+  }
+
+  .blog-card {
+    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-5px);
+    border-color: #cbd5e1;
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.10);
+  }
+
+  nav a,
+  aside a,
+  aside button {
+    transition: color 250ms ease, background-color 250ms ease, border-color 250ms ease, transform 250ms ease;
+  }
+
+  nav a:hover,
+  aside a:hover,
+  aside button:hover {
+    background-color: #eff6ff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+button:not(:disabled),
+a[href],
+[role="button"],
+[role="link"] {
+  cursor: pointer;
+}
+
+input[type="file"],
+input[type="file"]::file-selector-button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
