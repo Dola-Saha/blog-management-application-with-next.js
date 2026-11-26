@@ -53,10 +53,10 @@ cp backend/.env.example backend/.env
 
 Set the values in `backend/.env` for your local MySQL server and application. The backend creates the configured database and synchronizes its tables at startup.
 
-Create `frontend/.env.local` with the frontend's API URL:
+Create the frontend environment file from the example:
 
-```dotenv
-NEXT_PUBLIC_API_URL=http://localhost:5000
+```sh
+cp frontend/.env.example frontend/.env
 ```
 
 Do not commit `.env` or `.env.local` files. Use a unique, strong value for `JWT_SECRET`.
@@ -81,11 +81,11 @@ Do not commit `.env` or `.env.local` files. Use a unique, strong value for `JWT_
 
 If both `GMAIL` and `GMAIL_APP_PASSWORD` are set, the backend creates an administrator account on startup when that email does not exist. If the account already exists, it is assigned the admin role and activated.
 
-### Frontend (`frontend/.env.local`)
+### Frontend (`frontend/.env`)
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_API_URL` | Backend base URL used by the browser. Defaults to `http://localhost:5000`. |
+| `NEXT_PUBLIC_API_URL` | Backend API base URL used by the browser. Defaults to `http://localhost:5000/api`. |
 
 **Password reset note:** The current backend logs the reset link to its console; it does not send the link by email.
 
@@ -189,3 +189,4 @@ Protected routes require a JWT in the `Authorization: Bearer <token>` header. Ro
 - View the user list and activate or deactivate accounts. Inactive users cannot log in.
 
 The admin account is provisioned at backend startup using `GMAIL` and `GMAIL_APP_PASSWORD`, as described in the environment-variable section.
+

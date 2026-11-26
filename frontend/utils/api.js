@@ -1,7 +1,8 @@
 import axios from "axios";
 import { clearAuthStorage, getToken } from "@/utils/auth";
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, "");
 
 const api = axios.create({ baseURL: API_URL });
 
@@ -21,7 +22,7 @@ api.interceptors.response.use(
       error.response?.status === 401 &&
       (message === "Authentication token is required" ||
         message === "Invalid or expired authentication token");
-    const isLoginRequest = error.config?.url?.includes("/api/auth/login");
+    const isLoginRequest = error.config?.url?.includes("/auth/login");
 
     if (typeof window !== "undefined" && isAuthenticationError && !isLoginRequest) {
       clearAuthStorage();
@@ -38,7 +39,7 @@ export const getErrorMessage = (error, fallback = "Something went wrong") =>
 
 export const photoUrl = (path) => {
   if (!path) return null;
-  return path.startsWith("http") ? path : `${API_URL}${path}`;
+  return path.startsWith("http") ? path : `${API_ORIGIN}${path}`;
 };
 
 export default api;
